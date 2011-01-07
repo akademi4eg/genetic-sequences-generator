@@ -96,6 +96,6 @@ public class StatsCollector extends java.util.TimerTask {
     public final static int DELAY = 500;
     private double minY = 0;
     private double maxY = 0;
-    public final static int CORR_LEN = 10;
+    public static int CORR_LEN = 10;
     private GenFrame statsHolder;
 }

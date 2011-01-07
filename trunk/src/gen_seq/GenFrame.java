@@ -422,6 +422,10 @@ public class GenFrame extends JFrame {
            mutationDialog = new mutationRateDialog(this, true);
            mutationDialog.setLocationRelativeTo(this);
        }
+       else
+       {
+           ((mutationRateDialog) mutationDialog).fillValues();
+       }
        mutationDialog.setVisible(true);
     }//GEN-LAST:event_mItemChangeMutRateActionPerformed
 
