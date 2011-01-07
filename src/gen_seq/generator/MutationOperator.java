@@ -1,6 +1,9 @@
 package gen_seq.generator;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author akademi4eg
@@ -39,8 +42,19 @@ public class MutationOperator implements UnaryEvolutionOperator {
             rate = new_rate;
     }
 
+    public synchronized void setRate(double aRate) {
+        if (aRate < 0 || aRate > 1.0) try {// Isn't it a strange construction?
+            throw new IOException("Invalid rate value.");
+        } catch (IOException ex) {
+            Logger.getLogger(MutationOperator.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+
+        rate = aRate;
+    }
+
     private double rate;
     private Random chaos = new Random();
     private Chromosome chr;
-    public final static double RATE_STEP = 0.0005;
+    public static double RATE_STEP = 0.0005;
 }

@@ -85,17 +85,25 @@ public class Population {
 
     public void evolve ()
     {
-        double f;
+        boolean do_update_rate = age % Chromosome.RATE_UPDATE_PERIOD == 0;
+        double f = 0;
         for (Chromosome chr : chromosomes)
         {
-            f = chr.getFitnessForceCalc();
+            if (do_update_rate) f = chr.getFitnessForceCalc();
             chr.getEvolutionOperator().apply();
-            if (chr.getFitnessForceCalc() < f)
-                chr.getEvolutionOperator().updateRate(-1.0);
-            else
-                chr.getEvolutionOperator().updateRate(1.0);
+            if (do_update_rate)
+            {
+                if (chr.getFitnessForceCalc() < f)
+                    chr.getEvolutionOperator().updateRate(-1.0);
+                else
+                    chr.getEvolutionOperator().updateRate(1.0);
+            }
 
-            if (chr.getFitness() < best_achievement.getFitness())
+            if (do_update_rate)
+                f = chr.getFitness();
+            else
+                f = chr.getFitnessForceCalc();
+            if (f < best_achievement.getFitness())
             {
                 best_achievement = chr.clone();
             }
@@ -149,6 +157,7 @@ public class Population {
         private static final Population INSTANCE = new Population();
     }
 
+    public static boolean keep_best = false;
     private boolean is_active = false;
     private boolean is_running = false;
     private int length = 10;

@@ -8,4 +8,5 @@ public interface UnaryEvolutionOperator {
     void apply ();
     void updateRate (double multiplier);
     double getRate ();
+    void setRate (double rate);
 }
