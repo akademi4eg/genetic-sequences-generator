@@ -27,6 +27,11 @@ public class mutationRateDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         getRootPane().setDefaultButton(btnOk);
+        fillValues();
+    }
+
+    public void fillValues ()
+    {
         if (Population.getInstance().isRunning())
         {
             txtMutRate.setText(Double.toString(Population.getInstance()
