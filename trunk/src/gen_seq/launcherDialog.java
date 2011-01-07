@@ -99,17 +99,14 @@ public class launcherDialog extends JDialog {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCancel)
-                        .addGap(51, 51, 51))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtPopLen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtChrLen, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCorr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(24, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtPopLen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtChrLen, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtCorr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancel))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +180,7 @@ public class launcherDialog extends JDialog {
                         if (!Population.getInstance().isActive()) continue;
                         Population.getInstance().evolve();
                         filler = Population.getInstance().getBest();
-                        if (Population.getInstance().getBestAchievement().getFitness() < filler.getFitness())
+                        if (Population.keep_best && Population.getInstance().getBestAchievement().getFitness() < filler.getFitness())
                             filler = Population.getInstance().getBestAchievement();
                         Population.getInstance().fill(filler);
                     }

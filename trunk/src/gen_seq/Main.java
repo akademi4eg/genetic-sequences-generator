@@ -24,5 +24,5 @@ public class Main {
         });
     }
 
-    public static final String version = "1.0.5";
+    public static final String version = "1.1.0";
 }

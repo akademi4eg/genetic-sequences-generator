@@ -111,5 +111,6 @@ public class Chromosome implements Cloneable {
     private UnaryEvolutionOperator mutator;
 
     public final static int BINARY_GENE = 1;
-    public final static double INITIAL_MUTATION_RATE = 0.05;
+    public static double INITIAL_MUTATION_RATE = 0.05;
+    public static int RATE_UPDATE_PERIOD = 1;
 }

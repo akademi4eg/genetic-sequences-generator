@@ -154,6 +154,8 @@ public class GenFrame extends JFrame {
         mItemPause = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         Exit = new javax.swing.JMenuItem();
+        menuOptions = new javax.swing.JMenu();
+        mItemChangeMutRate = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
         mItemAbout = new javax.swing.JMenuItem();
 
@@ -331,6 +333,19 @@ public class GenFrame extends JFrame {
 
         mainMenu.add(menuRun);
 
+        menuOptions.setText("Options");
+
+        mItemChangeMutRate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mItemChangeMutRate.setText("Set mutation rate...");
+        mItemChangeMutRate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemChangeMutRateActionPerformed(evt);
+            }
+        });
+        menuOptions.add(mItemChangeMutRate);
+
+        mainMenu.add(menuOptions);
+
         menuHelp.setText("Help");
 
         mItemAbout.setText("About...");
@@ -401,7 +416,17 @@ public class GenFrame extends JFrame {
                 +Main.version+"."+System.getProperty("line.separator")+"Distributed under GNU GPLv2."+System.getProperty("line.separator")+"Developed in 2010-2011 by Dmytro Tkanov.", "About sequences generator", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_mItemAboutActionPerformed
 
+    private void mItemChangeMutRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemChangeMutRateActionPerformed
+       if (mutationDialog == null)
+       {
+           mutationDialog = new mutationRateDialog(this, true);
+           mutationDialog.setLocationRelativeTo(this);
+       }
+       mutationDialog.setVisible(true);
+    }//GEN-LAST:event_mItemChangeMutRateActionPerformed
+
     private JDialog launchDialog;
+    private JDialog mutationDialog;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Exit;
     private javax.swing.JTable chrsStats;
@@ -419,11 +444,13 @@ public class GenFrame extends JFrame {
     private javax.swing.JLabel lblPopLen;
     private javax.swing.JLabel lblRate;
     private javax.swing.JMenuItem mItemAbout;
+    private javax.swing.JMenuItem mItemChangeMutRate;
     private javax.swing.JMenuItem mItemLaunch;
     private javax.swing.JMenuItem mItemPause;
     private javax.swing.JMenuItem mItemStop;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenu menuOptions;
     private javax.swing.JMenu menuRun;
     private javax.swing.JPanel statsPanel;
     // End of variables declaration//GEN-END:variables
