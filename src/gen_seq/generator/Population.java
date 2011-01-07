@@ -21,6 +21,7 @@ public class Population {
                 chromosomes[i] = new Chromosome(chr_length, Chromosome.BINARY_GENE);
             }
             best_achievement = chromosomes[0].clone();
+            age = 1;
         } catch (DataFormatException ex) {
             Logger.getLogger(Population.class.getName()).log(Level.SEVERE, null, ex);
         }

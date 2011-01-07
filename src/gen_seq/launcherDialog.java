@@ -7,6 +7,7 @@
 package gen_seq;
 
 import gen_seq.generator.*;
+import java.io.IOException;
 import java.util.logging.*;
 import java.util.zip.*;
 import javax.swing.*;
@@ -153,13 +154,12 @@ public class launcherDialog extends JDialog {
             return;
         }
 
-        EtalonCorrelator.getParser().addVariable("r", 1);
-        EtalonCorrelator.getParser().parseExpression(txtCorr.getText());// Parse the expression
-        if (EtalonCorrelator.getParser().hasError()) {
-            JOptionPane.showMessageDialog(this, "Error while parsing expression for correlator. "+EtalonCorrelator.getParser().getErrorInfo(), "Validation error", JOptionPane.ERROR_MESSAGE);
+        try {
+            EtalonCorrelator.setExpression(txtCorr.getText());
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error while parsing expression for correlator. "+ex.getMessage(), "Validation error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        EtalonCorrelator.expression = txtCorr.getText();
         
         ((GenFrame)getParent()).lockElementsDueToLaunch();
         // starting population
