@@ -192,7 +192,10 @@ public class mutationRateDialog extends javax.swing.JDialog {
             return;
         }
 
+        boolean pop_activity = Population.getInstance().isActive();
+        Population.getInstance().setActive(false);
         Chromosome.INITIAL_MUTATION_RATE = m_rate;
+        Population.getInstance().getBestAchievement().getEvolutionOperator().setRate(m_rate);
         if (Population.getInstance().isRunning())
         {
             for (int i=0; i<Population.getInstance().getLength(); i++)
@@ -201,26 +204,9 @@ public class mutationRateDialog extends javax.swing.JDialog {
         Chromosome.RATE_UPDATE_PERIOD = m_period;
         MutationOperator.RATE_STEP = m_step;
         Population.keep_best = chkKeepBest.isSelected();
-        
+        Population.getInstance().setActive(pop_activity);
         dispose();
     }//GEN-LAST:event_btnOkActionPerformed
-
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                mutationRateDialog dialog = new mutationRateDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
