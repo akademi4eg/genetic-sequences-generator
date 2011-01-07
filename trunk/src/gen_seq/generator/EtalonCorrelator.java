@@ -42,6 +42,17 @@ public class EtalonCorrelator {
         return corrParser;
     }
 
+    public static void setExpression (String expr) throws IOException
+    {
+        getParser().addVariable("r", 1);
+        getParser().parseExpression(expr);
+        if (getParser().hasError()) {
+            throw new IOException(getParser().getErrorInfo());
+        }
+        expression = expr;
+        cache.clear();
+    }
+
     public static String expression;
     private static HashMap<Integer, Double> cache;
     private static org.nfunk.jep.JEP corrParser;
