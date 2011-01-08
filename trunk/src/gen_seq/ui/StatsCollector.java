@@ -1,4 +1,4 @@
-package gen_seq;
+package gen_seq.ui;
 
 import gen_seq.generator.*;
 import java.io.IOException;

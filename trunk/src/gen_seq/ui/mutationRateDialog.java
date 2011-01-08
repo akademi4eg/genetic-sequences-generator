@@ -9,7 +9,7 @@
  * Created on 07.01.2011, 17:21:37
  */
 
-package gen_seq;
+package gen_seq.ui;
 
 import gen_seq.generator.Chromosome;
 import gen_seq.generator.MutationOperator;

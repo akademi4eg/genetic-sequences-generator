@@ -4,7 +4,7 @@
  * Created on 30.11.2010, 0:09:09
  */
 
-package gen_seq;
+package gen_seq.ui;
 
 import gen_seq.generator.Population;
 import java.awt.Color;
@@ -152,6 +152,8 @@ public class GenFrame extends JFrame {
         mItemLaunch = new javax.swing.JMenuItem();
         mItemStop = new javax.swing.JMenuItem();
         mItemPause = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        mItemExport = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         Exit = new javax.swing.JMenuItem();
         menuOptions = new javax.swing.JMenu();
@@ -292,7 +294,7 @@ public class GenFrame extends JFrame {
 
         menuRun.setText("Run");
 
-        mItemLaunch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        mItemLaunch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         mItemLaunch.setText("Launch...");
         mItemLaunch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,6 +322,11 @@ public class GenFrame extends JFrame {
             }
         });
         menuRun.add(mItemPause);
+        menuRun.add(jSeparator2);
+
+        mItemExport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mItemExport.setText("Export...");
+        menuRun.add(mItemExport);
         menuRun.add(jSeparator1);
 
         Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
@@ -336,7 +343,7 @@ public class GenFrame extends JFrame {
         menuOptions.setText("Options");
 
         mItemChangeMutRate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        mItemChangeMutRate.setText("Set mutation rate...");
+        mItemChangeMutRate.setText("Evolution parameters...");
         mItemChangeMutRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mItemChangeMutRateActionPerformed(evt);
@@ -442,6 +449,7 @@ public class GenFrame extends JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JLabel lblBestAch;
     private javax.swing.JLabel lblChrLen;
     private javax.swing.JLabel lblPopAge;
@@ -449,6 +457,7 @@ public class GenFrame extends JFrame {
     private javax.swing.JLabel lblRate;
     private javax.swing.JMenuItem mItemAbout;
     private javax.swing.JMenuItem mItemChangeMutRate;
+    private javax.swing.JMenuItem mItemExport;
     private javax.swing.JMenuItem mItemLaunch;
     private javax.swing.JMenuItem mItemPause;
     private javax.swing.JMenuItem mItemStop;

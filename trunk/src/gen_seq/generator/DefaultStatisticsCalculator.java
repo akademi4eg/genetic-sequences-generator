@@ -2,7 +2,7 @@ package gen_seq.generator;
 
 import java.io.IOException;
 import java.util.*;
-import gen_seq.*;
+import gen_seq.ui.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
