@@ -1,4 +1,4 @@
-package gen_seq;
+package gen_seq.ui;
 
 import java.awt.*;
 import javax.swing.*;
@@ -24,5 +24,5 @@ public class Main {
         });
     }
 
-    public static final String version = "1.1.0";
+    public static final String version = "1.1.1";
 }
