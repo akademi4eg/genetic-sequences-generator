@@ -37,6 +37,30 @@ public class Chromosome implements Cloneable {
         mutator = new MutationOperator(a_rate, this);
     }
 
+    public synchronized void evolve ()
+    {
+        double f = 0;
+        boolean do_update_rate = Population.getInstance().getAge() % RATE_UPDATE_PERIOD == 0;
+        if (do_update_rate) f = getFitnessForceCalc();
+        getEvolutionOperator().apply();
+        if (do_update_rate)
+        {
+            if (getFitnessForceCalc() < f)
+                getEvolutionOperator().updateRate(-1.0);
+            else
+                getEvolutionOperator().updateRate(1.0);
+        }
+
+        if (do_update_rate)
+            f = getFitness();
+        else
+            f = getFitnessForceCalc();
+        if (f < Population.getInstance().getBestAchievement().getFitness())
+        {
+            Population.getInstance().setBestAchievement(this);
+        }
+    }
+
     public int getLength ()
     {
         return length;
