@@ -326,6 +326,7 @@ public class GenFrame extends JFrame {
 
         mItemExport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mItemExport.setText("Export...");
+        mItemExport.setEnabled(false);
         menuRun.add(mItemExport);
         menuRun.add(jSeparator1);
 
