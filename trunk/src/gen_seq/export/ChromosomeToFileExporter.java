@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package gen_seq.export;
 
@@ -35,7 +31,17 @@ public class ChromosomeToFileExporter implements Exporter<Chromosome> {
                                          .replace("{CORRELATOR}", EtalonCorrelator.expression)
                                          .replace("{CORR_LEN}", Integer.toString(StatsCollector.CORR_LEN));
             out.write(header);
-            // TODO fill with data
+            Gene[] genes = getData().getGenes();
+            if (getData().getLength() > 0)
+            {
+                out.write(genes[0].toString());
+                for (int i=1; i < getData().getLength(); i++)
+                {
+                    if (i % Integer.parseInt(getSettings().getProperty("line.length")) == 0)
+                        out.write(System.getProperty("line.separator"));
+                    out.write(genes[i].toString());
+                }
+            }
         } catch (IOException ex)
         {
             

@@ -1,6 +1,7 @@
 package gen_seq.generator;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.DataFormatException;
@@ -28,6 +29,16 @@ public class Population {
         }
         best_achievement = chromosomes[0].clone();
         age = 1;
+    }
+
+    public Semaphore getEvolutionKeeper ()
+    {
+        if (evolution_keeper == null)
+        {
+            evolution_keeper = new Semaphore(1);
+        }
+
+        return evolution_keeper;
     }
 
     public CountDownLatch getEvolutionCounter ()
@@ -186,6 +197,7 @@ public class Population {
     public static boolean keep_best = false;
     private boolean is_active = false;
     private CountDownLatch evolution_counter;
+    private Semaphore evolution_keeper;
     private boolean is_running = false;
     private int length = 10;
     private int chr_length = 1000;

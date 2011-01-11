@@ -195,14 +195,14 @@ public class launcherDialog extends JDialog {
                     while (Population.getInstance().isRunning())
                     {
                         if (!Population.getInstance().isActive()) continue;
-                        // TODO add semaphore for exporting here
                         try {
+                            Population.getInstance().getEvolutionKeeper().acquire();
                             Population.getInstance().evolve();
                             filler = Population.getInstance().getBest();
                             if (Population.keep_best && Population.getInstance().getBestAchievement().getFitness() < filler.getFitness())
                                 filler = Population.getInstance().getBestAchievement();
                             Population.getInstance().fill(filler);
-                            Population.getInstance().getEvolutionCounter().await();
+                            Population.getInstance().getEvolutionKeeper().release();
                         } catch (InterruptedException ex) {
                             Logger.getLogger(launcherDialog.class.getName()).log(Level.SEVERE, null, ex);
                         }

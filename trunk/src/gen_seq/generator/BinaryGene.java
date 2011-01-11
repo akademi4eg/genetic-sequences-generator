@@ -1,8 +1,5 @@
 package gen_seq.generator;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author akademi4eg
@@ -34,7 +31,13 @@ public final class BinaryGene implements Gene, Cloneable {
     }
 
     @Override
-    public Gene clone() throws CloneNotSupportedException
+    public String toString ()
+    {
+        return Integer.toString(value);
+    }
+
+    @Override
+    public Gene clone () throws CloneNotSupportedException
     {
         return (Gene) super.clone();
     }
