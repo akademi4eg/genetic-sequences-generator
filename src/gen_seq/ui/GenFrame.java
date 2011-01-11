@@ -6,9 +6,12 @@
 
 package gen_seq.ui;
 
+import gen_seq.export.ChromosomeToFileExporter;
 import gen_seq.generator.Population;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.util.*;
@@ -35,6 +38,7 @@ public class GenFrame extends JFrame {
                 mItemLaunch.setEnabled(false);
                 mItemPause.setEnabled(true);
                 mItemStop.setEnabled(true);
+                mItemExport.setEnabled(true);
             }
         });
     }
@@ -327,6 +331,11 @@ public class GenFrame extends JFrame {
         mItemExport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mItemExport.setText("Export...");
         mItemExport.setEnabled(false);
+        mItemExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemExportActionPerformed(evt);
+            }
+        });
         menuRun.add(mItemExport);
         menuRun.add(jSeparator1);
 
@@ -436,6 +445,25 @@ public class GenFrame extends JFrame {
        }
        mutationDialog.setVisible(true);
     }//GEN-LAST:event_mItemChangeMutRateActionPerformed
+
+    private void mItemExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemExportActionPerformed
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Population.getInstance().setActive(false);
+                    ChromosomeToFileExporter exporter = new ChromosomeToFileExporter();
+                    Population.getInstance().getEvolutionKeeper().acquire();
+                    exporter.setData(Population.getInstance().getBestAchievement());
+                    exporter.setName("exported_chromosome");
+                    exporter.run();
+                    Population.getInstance().getEvolutionKeeper().release();
+                    Population.getInstance().setActive(true);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GenFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+    }//GEN-LAST:event_mItemExportActionPerformed
 
     private JDialog launchDialog;
     private JDialog mutationDialog;
