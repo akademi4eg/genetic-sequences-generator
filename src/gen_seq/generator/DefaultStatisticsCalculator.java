@@ -30,6 +30,19 @@ public class DefaultStatisticsCalculator implements StatisticsCalculator {
         return avg.doubleValue();
     }
 
+    public synchronized double getVariance(boolean force) {
+        if (!force && var != null)
+            return var.doubleValue();
+
+        var = 0.0;
+        double curr_avg = getAvg(force);
+        for (int i=0; i<chr.getLength(); i++)
+            var += Math.pow(chr.getGeneValue(i) - curr_avg, 2);
+        var /= (double)chr.getLength();
+
+        return var.doubleValue();
+    }
+
     public synchronized double getCorrelator(int r, boolean force) {
         if (r > chr.getLength())
             throw new IllegalArgumentException("Param should be less then chromosome length.");
@@ -44,6 +57,7 @@ public class DefaultStatisticsCalculator implements StatisticsCalculator {
         }
         c = c / (double) (chr.getLength()-r);
         c -= Math.pow(getAvg(force), 2);
+        c = c / getVariance(force);
 
         corrs.put(r, c);
         return c;
@@ -77,6 +91,7 @@ public class DefaultStatisticsCalculator implements StatisticsCalculator {
 
     private Chromosome chr;
     private Double avg = null;
+    private Double var = null;
     private Double fit = null;
     private HashMap<Integer, Double> corrs;
 }
