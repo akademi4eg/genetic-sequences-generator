@@ -450,6 +450,7 @@ public class GenFrame extends JFrame {
         new Thread(new Runnable() {
             public void run() {
                 try {
+                    boolean active_state = Population.getInstance().isActive();
                     Population.getInstance().setActive(false);
                     ChromosomeToFileExporter exporter = new ChromosomeToFileExporter();
                     Population.getInstance().getEvolutionKeeper().acquire();
@@ -457,7 +458,7 @@ public class GenFrame extends JFrame {
                     exporter.setName("exported_chromosome");
                     exporter.run();
                     Population.getInstance().getEvolutionKeeper().release();
-                    Population.getInstance().setActive(true);
+                    Population.getInstance().setActive(active_state);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GenFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
