@@ -6,9 +6,9 @@ import java.util.Random;
  *
  * @author akademi4eg
  */
-public final class TenaryGene implements Gene, Cloneable {
+public final class TernaryGene implements Gene, Cloneable {
 
-    public TenaryGene ()
+    public TernaryGene ()
     {
         setRandom();
     }
