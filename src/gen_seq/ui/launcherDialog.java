@@ -82,7 +82,7 @@ public class launcherDialog extends JDialog {
 
         jLabel3.setText("Correlator C(r)=");
 
-        txtCorr.setText("0.25*exp(-r)");
+        txtCorr.setText("exp(-r)");
         txtCorr.setToolTipText("Enter correlator here.");
 
         jLabel4.setText("Control points num:");

@@ -52,7 +52,7 @@ public class StatsCollector extends java.util.TimerTask {
                                                pop.getChromosome(i).getFitness(), col);
         }
         double cr;
-        for (int r=1; r<CORR_LEN + 1; r++)
+        for (int r=0; r<CORR_LEN + 1; r++)
         {
             try {
                 cr = EtalonCorrelator.calculate(r);
@@ -62,7 +62,7 @@ public class StatsCollector extends java.util.TimerTask {
                 Logger.getLogger(StatsCollector.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        statsHolder.drawCorrsPlotAxis(minY, maxY, 1, CORR_LEN);
+        statsHolder.drawCorrsPlotAxis(minY, maxY, 0, CORR_LEN);
         statsHolder.updateStats(POPULATION_AGE, Integer.toString(pop.getAge()));
         statsHolder.updateStats(AVG_RATE, Double.toString(Math.round(pop.getAvgRate()*100000)/100000.0));
         statsHolder.updateStats(BEST_ACHIEVEMENT, Double.toString(Math.round(pop.getBestAchievement().getFitness()*10000)/10000.0));
@@ -72,7 +72,7 @@ public class StatsCollector extends java.util.TimerTask {
     {
         LinkedList<CorrPoint> pts = new LinkedList<CorrPoint>();
         CorrPoint temp = new CorrPoint(0, 0);
-        for (int r=1; r<CORR_LEN + 1; r++)
+        for (int r=0; r<CORR_LEN + 1; r++)
         {
             temp.x = r;
             temp.y = chr.getCorrelator(r);
@@ -81,8 +81,8 @@ public class StatsCollector extends java.util.TimerTask {
             } catch (CloneNotSupportedException ex) {
                 Logger.getLogger(StatsCollector.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (temp.y > maxY) maxY = temp.y;
-            else if (temp.y < minY) minY = temp.y;
+            /*if (temp.y > maxY) maxY = temp.y;
+            else if (temp.y < minY) minY = temp.y;*/
         }
 
         return pts;

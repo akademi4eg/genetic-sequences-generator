@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author akademi4eg
  */
-public class mutationRateDialog extends javax.swing.JDialog {
+public final class mutationRateDialog extends javax.swing.JDialog {
 
     /** Creates new form mutationRateDialog */
     public mutationRateDialog(java.awt.Frame parent, boolean modal) {
@@ -34,10 +34,10 @@ public class mutationRateDialog extends javax.swing.JDialog {
     {
         if (Population.getInstance().isRunning())
         {
-            txtMutRate.setText(Double.toString(Population.getInstance()
+            txtMutRate.setText(Double.toString(Math.round(Population.getInstance()
                                                          .getBestAchievement()
                                                          .getEvolutionOperator()
-                                                         .getRate()));
+                                                         .getRate()*10000)/ 10000.0 ));
             txtRatePeriod.setText(Integer.toString(Chromosome.RATE_UPDATE_PERIOD));
             txtRateStep.setText(Double.toString(MutationOperator.RATE_STEP));
             chkKeepBest.setSelected(Population.keep_best);
@@ -200,9 +200,9 @@ public class mutationRateDialog extends javax.swing.JDialog {
         boolean pop_activity = Population.getInstance().isActive();
         Population.getInstance().setActive(false);
         Chromosome.INITIAL_MUTATION_RATE = m_rate;
-        Population.getInstance().getBestAchievement().getEvolutionOperator().setRate(m_rate);
         if (Population.getInstance().isRunning())
         {
+            Population.getInstance().getBestAchievement().getEvolutionOperator().setRate(m_rate);
             for (int i=0; i<Population.getInstance().getLength(); i++)
                 Population.getInstance().getChromosome(i).getEvolutionOperator().setRate(m_rate);
         }
