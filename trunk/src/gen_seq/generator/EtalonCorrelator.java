@@ -11,7 +11,7 @@ public class EtalonCorrelator {
 
     public synchronized static double calculate (int r) throws IOException
     {
-        if ( r == 0 ) return 0.25; // TODO is this a good solution?
+        if ( r == 0 ) return 1.0; // TODO is this a good solution?
         if (expression == null) return 0.0;
         if (cache == null) cache = new HashMap<Integer, Double>();
 
