@@ -145,7 +145,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtCorr">
       <Properties>
-        <Property name="text" type="java.lang.String" value="0.25*exp(-r)"/>
+        <Property name="text" type="java.lang.String" value="exp(-r)"/>
         <Property name="toolTipText" type="java.lang.String" value="Enter correlator here."/>
       </Properties>
     </Component>

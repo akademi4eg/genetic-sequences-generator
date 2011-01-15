@@ -88,7 +88,7 @@ public class PlotPanel extends JPanel {
     private HashMap<Color, LinkedList<CorrPoint>> points;
     private DecimalFormat formater;
     private double minY = 0.0;
-    private double maxY = 0.25;
+    private double maxY = 1.0;
     private int minX = 0;
     private int maxX = 10;
     private static int POINT_SIZE = 4;
