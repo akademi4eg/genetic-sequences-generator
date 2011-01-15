@@ -9,17 +9,22 @@ import java.util.zip.DataFormatException;
  * @author akademi4eg
  */
 public class Chromosome implements Cloneable {
-    public Chromosome (int len, int gene_type) throws DataFormatException
+    public Chromosome (int len, GeneTypes gene_type) throws DataFormatException
     {
         if (len <= 0)
             throw new DataFormatException("Length should be positive");
         length = len;
         switch (gene_type)
         {
-            case BINARY_GENE:
+            case BINARY:
                 genes = new BinaryGene[len];
                 for (int i=0; i<len; i++)
                     genes[i] = new BinaryGene();
+                break;
+            case TERNARY:
+                genes = new TernaryGene[len];
+                for (int i=0; i<len; i++)
+                    genes[i] = new TernaryGene();
                 break;
             default:
                 throw new IllegalArgumentException("Unknown gene type.");
@@ -134,7 +139,6 @@ public class Chromosome implements Cloneable {
     private StatisticsCalculator stats;
     private UnaryEvolutionOperator mutator;
 
-    public final static int BINARY_GENE = 1;
     public static double INITIAL_MUTATION_RATE = 0.05;
     public static int RATE_UPDATE_PERIOD = 1;
 }

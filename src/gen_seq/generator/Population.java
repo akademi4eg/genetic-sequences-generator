@@ -20,7 +20,7 @@ public class Population {
         resetEvolutionCounter();
         chromosomes = new Chromosome[length];
         for (int i=0; i<length; i++) {
-            new Thread(new ChromosomeInitializer(i, chr_length, Chromosome.BINARY_GENE)).start();
+            new Thread(new ChromosomeInitializer(i, chr_length, getGenesType())).start();
         }
         try {
             getEvolutionCounter().await();
@@ -194,11 +194,23 @@ public class Population {
         private static final Population INSTANCE = new Population();
     }
 
+    public GeneTypes getGenesType ()
+    {
+        if (genes_type == null) throw new IllegalStateException();
+        return genes_type;
+    }
+
+    public void setGenesType (GeneTypes gType)
+    {
+        genes_type = gType;
+    }
+
     public static boolean keep_best = false;
     private boolean is_active = false;
     private CountDownLatch evolution_counter;
     private Semaphore evolution_keeper;
     private boolean is_running = false;
+    private GeneTypes genes_type;
     private int length = 10;
     private int chr_length = 1000;
     private int age = 1;
@@ -208,7 +220,7 @@ public class Population {
 
 class ChromosomeInitializer implements Runnable
 {
-    public ChromosomeInitializer (int chr_index, int length, int type)
+    public ChromosomeInitializer (int chr_index, int length, GeneTypes type)
     {
         this.chr_index = chr_index;
         this.length = length;
@@ -226,7 +238,7 @@ class ChromosomeInitializer implements Runnable
     }
 
     private int chr_index;
-    private int type;
+    private GeneTypes type;
     private int length;
 }
 
