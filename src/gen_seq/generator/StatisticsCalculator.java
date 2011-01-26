@@ -6,6 +6,7 @@ package gen_seq.generator;
  */
 public interface StatisticsCalculator {
     double getAvg (boolean force);
+    double getVariance (boolean force);
     double getCorrelator (int r, boolean force);
     double getFitness (boolean force);
     void reset ();
